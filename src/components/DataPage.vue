@@ -60,5 +60,6 @@ h1 {
   width: fit-content;
   padding: 5px;
   border-radius: 8px;
+  margin-left: 20px;
 }
 </style>
