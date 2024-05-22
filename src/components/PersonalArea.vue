@@ -243,12 +243,6 @@ onMounted(() => {
                   {{ new Date(record.date).toLocaleString("ru-RU") }}
                 </p>
                 <p>Адрес сервиса: {{ record.adressService }}</p>
-                <button
-                  @click="deleteUserRecord(record.id, record.date)"
-                  class="btn-delete-record"
-                >
-                  Удалить
-                </button>
               </div>
             </div>
           </div>
@@ -317,13 +311,65 @@ onMounted(() => {
   color: black;
 }
 
-.title-settings {
-  margin-top: 20px;
-  
-}
-
 .record {
   border: 2px solid black;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  width: fit-content;
+  padding: 10px;
+  min-width: 350px;
+  border-radius: 9px;
+}
+
+.user-settings {
+  margin-top: 20px;
+}
+
+.title-settings {
+  margin-left: 10px;
+}
+
+.wrapper-change-data {
+  margin-top: 10px;
+}
+
+.number-phone {
+  margin-left: 10px;
+}
+
+.group-add-car {
+  margin-top: 10px;
+}
+
+.input-group-add-car {
+  margin-top: 10px;
+}
+
+.input-model-car {
+  margin-left: 10px;
+}
+
+.input-mileage {
+  margin-left: 10px;
+}
+
+.save-data {
+  margin-top: 10px;
+  padding: 5px;
+  background: none;
+  width: fit-content;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.record-service {
+  margin-top: 20px;
+}
+
+.record-service-title {
+  margin-left: 10px;
+}
+
+.record-list {
+  margin-top: 10px;
 }
 </style>

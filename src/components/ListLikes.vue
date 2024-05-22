@@ -59,10 +59,12 @@ onMounted(async () => {
 <template>
   <div class="wrapper-favorites">
     <div class="wrapper-redirect" @click="redirectToMainPage">
-      <i class="pi pi-arrow-left" />Вернуться
+      <i class="pi pi-arrow-left" /><span class="title-redirect"
+        >Вернуться</span
+      >
     </div>
-    <span class="title-favorites">Список избранного</span>
     <div class="favorites-card-group">
+      <span class="title-favorites">Список избранного</span>
       <Card
         class="card"
         v-for="(announcement, i) in favoriteAnnouncements"
@@ -99,10 +101,32 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.wrapper-redirect {
+  margin-left: 40px;
+}
+
+.title-redirect {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.title-favorites {
+  font-size: 18px;
+}
+
+.favorites-card-group {
+  margin-left: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 .card {
   width: 37vh;
   height: 340px;
   border: 2px solid black;
+  border-radius: 8px;
+  margin-top: 20px;
 }
 
 .announcements-avatar {
