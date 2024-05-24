@@ -16,21 +16,39 @@ import { getUserIdFromLocalStorage } from "./stores/getLocalStorage";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import { computed } from "vue";
 
 const router = useRouter();
 const authStore = useAuthStore();
 const userId = getUserIdFromLocalStorage();
 
+const inputSearch = ref("");
+
 const usedAnnouncements = ref([]);
 const newAnnouncements = ref([]);
 
-const filteredUsedAnnouncements = ref();
-const filteredNewAnnouncements = ref();
+const filteredUsedAnnouncements = ref([]);
+const filteredNewAnnouncements = ref([]);
+
+const searchedUsedAnnouncements = computed(() => {
+  return filteredUsedAnnouncements.value.filter((element) => {
+    return (element.markCar + " " + element.modelCar)
+      .toLowerCase()
+      .includes(inputSearch.value.toLowerCase());
+  });
+});
+
+const searchedNewAnnouncements = computed(() => {
+  return filteredNewAnnouncements.value.filter((element) => {
+    return (element.markCar + " " + element.modelCar)
+      .toLowerCase()
+      .includes(inputSearch.value.toLowerCase());
+  });
+});
 
 const userData = ref("");
 
 const datetime24h = ref();
-const inputSearch = ref("");
 const selectTypeCatalog = ref(null);
 
 const selectedTypeService = ref();
@@ -261,7 +279,7 @@ onMounted(async () => {
       <div v-if="selectTypeCatalog === 'usedCar'" class="list-used-car">
         <Card
           class="card"
-          v-for="(announcement, i) in filteredUsedAnnouncements"
+          v-for="(announcement, i) in searchedUsedAnnouncements"
           :key="i"
         >
           <template #header>
@@ -293,7 +311,7 @@ onMounted(async () => {
       <div v-if="selectTypeCatalog === 'newCar'" class="list-new-car">
         <Card
           class="card"
-          v-for="(announcement, i) in filteredNewAnnouncements"
+          v-for="(announcement, i) in searchedNewAnnouncements"
           :key="i"
         >
           <template #header>
@@ -414,7 +432,7 @@ onMounted(async () => {
 .nav-menu {
   display: flex;
   align-items: center;
-  margin-left: 50vh;
+  margin-left: 40vh;
 }
 
 .btn-personal-area {

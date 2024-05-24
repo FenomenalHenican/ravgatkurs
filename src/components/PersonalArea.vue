@@ -18,7 +18,15 @@ import axios from "axios";
 const userId = getUserIdFromLocalStorage();
 const userEmail = getUserEmailFromLocalStorage();
 
-const userData = ref("");
+const userData = ref({
+  userName: "",
+  numberPhone: "",
+  markCar: "",
+  modelCar: "",
+  mileage: "",
+  userId: "",
+  userEmail: "",
+});
 
 const userName = ref("");
 const numberPhone = ref("");
@@ -80,7 +88,9 @@ const getUserData = async () => {
       `https://rafgat-kurs-default-rtdb.europe-west1.firebasedatabase.app/userData/${userId}.json`
     );
     const data = await response.json();
-    userData.value = data;
+    if (data) {
+      userData.value = data;
+    }
     console.log(userData.value);
   } catch (error) {
     console.log("Error during get access information about user: ", error);
@@ -109,20 +119,6 @@ const filterUserRecords = () => {
     (record) => record.userId === userId
   );
 };
-const deleteUserRecord = async (id, date) => {
-  const formatDate = format(date, "yyyy-MM-dd");
-  console.log(id);
-  try {
-    await axios.delete(
-      `https://rafgat-kurs-default-rtdb.europe-west1.firebasedatabase.app/records/${formatDate}/${id}.json`
-    );
-    console.log(
-      `https://rafgat-kurs-default-rtdb.europe-west1.firebasedatabase.app/records/${id}.json`
-    );
-  } catch (error) {
-    console.log("Error during get access information about user: ", error);
-  }
-};
 
 const clearFields = () => {
   userName.value = "";
@@ -139,14 +135,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="userData">
-    <AdminPanel v-if="userData.ADMIN" />
+  <div>
+    <AdminPanel v-if="userData?.ADMIN" />
     <template v-else>
       <div class="user-data-container">
         <div class="user-data-title">Данные пользователя</div>
         <div class="user-data">
           <div class="user-name">ФИО: {{ userData.userName }}</div>
-          <div class="user-id">UserId: {{ userData.userId }}</div>
           <div class="user-email">Email: {{ userData.userEmail }}</div>
           <div class="user-phone">
             Контактный телефон: {{ userData.numberPhone }}
@@ -225,25 +220,22 @@ onMounted(() => {
             @click="toogleRecords"
             v-if="isRecordsVisible"
           />
-          <span class="record-service-title" v-if="userRecords.length"
-            >Ваши записи в центр</span
-          >
+          <span class="record-service-title">Ваши записи в центр</span>
           <div class="record-list" v-if="isRecordsVisible">
-            <div v-if="userRecords.length">
-              <div
-                v-for="(record, index) in userRecords"
-                :key="index"
-                class="record"
-              >
-                <p>Машина: {{ record.markCar }} {{ record.modelCar }}</p>
-                <p>Пробег: {{ record.mileage }} km</p>
-                <p>Тип услуги: {{ record.serviceType }}</p>
-                <p>
-                  Время записи:
-                  {{ new Date(record.date).toLocaleString("ru-RU") }}
-                </p>
-                <p>Адрес сервиса: {{ record.adressService }}</p>
-              </div>
+            <div v-if="!userRecords.length">У вас нет записей</div>
+            <div
+              v-for="(record, index) in userRecords"
+              :key="index"
+              class="record"
+            >
+              <p>Машина: {{ record.markCar }} {{ record.modelCar }}</p>
+              <p>Пробег: {{ record.mileage }} km</p>
+              <p>Тип услуги: {{ record.serviceType }}</p>
+              <p>
+                Время записи:
+                {{ new Date(record.date).toLocaleString("ru-RU") }}
+              </p>
+              <p>Адрес сервиса: {{ record.adressService }}</p>
             </div>
           </div>
         </div>

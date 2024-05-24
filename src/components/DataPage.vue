@@ -1,7 +1,6 @@
 <script setup>
 import { computed, watch } from "vue";
 import { format } from "date-fns";
-
 const props = defineProps({
   records: Array,
   selectedDate: Date,

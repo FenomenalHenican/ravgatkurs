@@ -63,39 +63,41 @@ onMounted(async () => {
         >Вернуться</span
       >
     </div>
-    <div class="favorites-card-group">
+    <div class="favorites">
       <span class="title-favorites">Список избранного</span>
-      <Card
-        class="card"
-        v-for="(announcement, i) in favoriteAnnouncements"
-        :key="i"
-      >
-        <template #header>
-          <img
-            alt="announcements-avatar"
-            class="announcements-avatar"
-            :src="announcement.imageUrl"
-          />
-        </template>
-        <template #title>
-          <div class="description-announcement"></div>
-          {{ announcement.markCar }} {{ announcement.modelCar }},
-          {{ announcement.mileage }}км,{{ announcement.horsePower }}л.с
-        </template>
-        <template #subtitle>
-          <div class="subtitle-container">
-            {{ announcement.price }}₽
-            <div class="option-menu">
-              <i
-                class="pi pi-trash"
-                @click="
-                  deleteFavoriteAnnouncements(announcement.announcementsId)
-                "
-              />
+      <div class="favorites-card-group">
+        <Card
+          class="card"
+          v-for="(announcement, i) in favoriteAnnouncements"
+          :key="i"
+        >
+          <template #header>
+            <img
+              alt="announcements-avatar"
+              class="announcements-avatar"
+              :src="announcement.imageUrl"
+            />
+          </template>
+          <template #title>
+            <div class="description-announcement"></div>
+            {{ announcement.markCar }} {{ announcement.modelCar }},
+            {{ announcement.mileage }}км,{{ announcement.horsePower }}л.с
+          </template>
+          <template #subtitle>
+            <div class="subtitle-container">
+              {{ announcement.price }}₽
+              <div class="option-menu">
+                <i
+                  class="pi pi-trash"
+                  @click="
+                    deleteFavoriteAnnouncements(announcement.announcementsId)
+                  "
+                />
+              </div>
             </div>
-          </div>
-        </template>
-      </Card>
+          </template>
+        </Card>
+      </div>
     </div>
   </div>
 </template>
@@ -110,6 +112,10 @@ onMounted(async () => {
   font-size: 20px;
 }
 
+.favorites {
+  margin-top: 20px;
+}
+
 .title-favorites {
   font-size: 18px;
 }
@@ -117,6 +123,7 @@ onMounted(async () => {
 .favorites-card-group {
   margin-left: 20px;
   margin-top: 20px;
+  display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }

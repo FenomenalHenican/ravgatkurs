@@ -40,21 +40,11 @@ const signup = async () => {
       <div class="input-group">
         <div class="input-card">
           <i class="pi pi-envelope" />
-          <input
-            class="input-email"
-            type="email"
-            v-model="email"
-            placeholder="Your Email"
-          />
+          <input class="input-email" type="email" v-model="email" />
         </div>
         <div class="input-card">
           <i class="pi pi-lock" />
-          <input
-            class="input-password"
-            type="password"
-            v-model="password"
-            placeholder="Your Password"
-          />
+          <input class="input-password" type="password" v-model="password" />
         </div>
         <div class="warn-short-password" v-if="isInvalidPassword">
           Too short password
@@ -94,7 +84,6 @@ const signup = async () => {
   margin: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgb(37, 39, 46);
 }
 
 .card {
@@ -105,6 +94,7 @@ const signup = async () => {
   border: 2px solid rgb(171, 205, 239);
   border-radius: 30px;
   margin-bottom: 40px;
+  background-color: rgb(135, 206, 235);
 }
 
 .title {
@@ -112,7 +102,7 @@ const signup = async () => {
   margin-left: 40%;
   margin-bottom: 70px;
   font-size: 30px;
-  color: rgb(171, 205, 239);
+  color: white;
   font-weight: bold;
 }
 
@@ -129,7 +119,7 @@ const signup = async () => {
 }
 
 i {
-  color: rgb(171, 205, 239);
+  color: white;
 }
 
 .input-email,
@@ -149,12 +139,13 @@ i {
   width: calc(100% - 50px);
   height: 29px;
   border-radius: 7px;
-  background-color: rgb(37, 39, 46);
-  color: rgb(171, 205, 239);
+  border: 2px solid white;
+  color: white;
   font-weight: bold;
   cursor: pointer;
   margin-top: 10px;
   font-size: 15px;
+  background-color: rgb(105, 176, 205);
 }
 
 .navigation-rout {
@@ -167,10 +158,10 @@ i {
   cursor: pointer;
   margin-left: 20px;
   border: none;
-  background-color: rgb(37, 39, 46);
+  background-color: rgb(135, 206, 235);
   font-size: 17px;
   margin-bottom: 20px;
-  color: rgb(171, 205, 239);
+  color: white;
 }
 
 .change-password-rout {
@@ -178,7 +169,7 @@ i {
   margin-right: 20px;
   font-size: 17px;
   margin-bottom: 20px;
-  color: rgb(171, 205, 239);
+  color: white;
 }
 
 .warn-short-password {
